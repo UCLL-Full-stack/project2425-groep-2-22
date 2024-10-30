@@ -1,3 +1,4 @@
+import { Exercise } from "./exercise";
 import { User } from "./user";
 
 export class Workout {
@@ -8,6 +9,7 @@ export class Workout {
     private duration: number;
     private calories: number;
     private user: User;
+    private exercises: Exercise[];
 
     constructor(workout: {
         id?: number;
@@ -17,6 +19,7 @@ export class Workout {
         duration: number;
         calories: number;
         user: User;
+        exercises: Exercise[];
     }) {
         this.validate(workout);
         this.id = workout.id;
@@ -26,6 +29,7 @@ export class Workout {
         this.duration = workout.duration;
         this.calories = workout.calories;
         this.user = workout.user;
+        this.exercises = workout.exercises;
     }
 
     getId(): number | undefined {
@@ -33,6 +37,9 @@ export class Workout {
     }
     getUser(): User {
         return this.user;
+    }
+    getExercises(): Exercise[] {
+        return this.exercises;
     }
 
     getName(): string {
@@ -58,6 +65,7 @@ export class Workout {
         duration: number;
         calories: number;
         user: User;
+        exercises: Exercise[];
     }) {
         if (!workout.name?.trim()) {
             throw new Error('Name is required');
@@ -77,6 +85,9 @@ export class Workout {
         if (!workout.user) {
             throw new Error('User is required');
         }
+        if (!workout.exercises) {
+            throw new Error('Exercises are required');
+        }
     }
 
     equals(workout: Workout): boolean {
@@ -86,7 +97,8 @@ export class Workout {
             this.type === workout.getType() &&
             this.duration === workout.getDuration() &&
             this.calories === workout.getCalories() &&
-            this.user === workout.getUser()
+            this.user === workout.getUser() &&
+            this.exercises === workout.getExercises()
         );
     }
 }

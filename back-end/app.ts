@@ -6,6 +6,7 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { userRouter } from './controller/user.routes';
 import { workoutRouter } from './controller/workout.routes';
+import { exerciseRouter } from './controller/exercise.routes';
 
 const app = express();
 dotenv.config();
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use('/user', userRouter);
 app.use('/workout', workoutRouter);
+app.use('/exercise', exerciseRouter);
 app.get('/status', (req, res) => {
     res.json({ message: 'Back-end is running...' });
 });
