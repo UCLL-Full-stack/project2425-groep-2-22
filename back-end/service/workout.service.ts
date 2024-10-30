@@ -49,6 +49,10 @@ const addExerciseToWorkout = async (workoutId: number, exerciseId: number): Prom
     if (!exercise) {
         throw new Error("Exercise does not exist");
     }
+    const isExerciseInWorkout = await workoutDb.findExerciseInWorkout(workoutId, exerciseId);
+    if (isExerciseInWorkout) {
+        throw new Error("Exercise is already in workout");
+    }
     await workoutDb.addExerciseToWorkout(workout, exercise);
     return workout;
 }

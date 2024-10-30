@@ -30,24 +30,6 @@
  *           description: Calories burned in the workout.
  *         user:
  *           $ref: '#/components/schemas/User'
- *     ExerciseInput:
- *       type: object
- *       properties:
- *         id:
- *           type: number
- *           format: int64
- *         name:
- *           type: string
- *         description:
- *           type: string
- *         sets:
- *           type: number
- *         reps:
- *           type: number
- *         rest:
- *           type: number
- *         muscleGroup:
- *           type: string
  */
 import express, { NextFunction, Request, Response } from 'express';
 import workoutService from '../service/workout.service';

@@ -33,4 +33,12 @@ const addExerciseToWorkout = async (workout: Workout, exercise: Exercise): Promi
     workout.getExercises().push(exercise);
     return workout;
 }
-export default { getAllWorkouts, createWorkout, getWorkoutById, addExerciseToWorkout};
+const findExerciseInWorkout = async (workoutId: number, exerciseId: number): Promise<boolean> => {
+    const workout = await getWorkoutById({ id: workoutId });
+    if (!workout) {
+        throw new Error("Workout does not exist");
+    }
+    const exercise = workout.getExercises().find((exercise) => exercise.getId() === exerciseId);
+    return exercise ? true : false;
+}
+export default { getAllWorkouts, createWorkout, getWorkoutById, addExerciseToWorkout, findExerciseInWorkout};
