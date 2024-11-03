@@ -4,7 +4,7 @@ import { Exercise } from '../model/exercise';
 const workouts = [
     new Workout({ 
         id: 1,
-        name: 'Hardlopen',
+        name: 'My custom workout',
         intensity: 'Hoog', 
         type: 'Cardio', 
         duration: 30, 

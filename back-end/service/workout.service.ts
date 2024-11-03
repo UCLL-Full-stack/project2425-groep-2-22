@@ -56,5 +56,12 @@ const addExerciseToWorkout = async (workoutId: number, exerciseId: number): Prom
     await workoutDb.addExerciseToWorkout(workout, exercise);
     return workout;
 }
+const getWorkoutById = (id: number): Workout | null => {
+    const workout = workoutDb.getWorkoutById({id: id });
+    if(workout){
+        return workout;
+    }throw new Error(`Workout with id ${id} does not exist`);
+};
 
-export default { getAllWorkouts, createWorkout, addExerciseToWorkout};
+
+export default { getAllWorkouts, createWorkout, addExerciseToWorkout, getWorkoutById };

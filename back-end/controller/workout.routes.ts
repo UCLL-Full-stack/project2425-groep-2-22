@@ -59,6 +59,38 @@ workoutRouter.get('/', async (req: Request, res: Response, next: NextFunction) =
         next(error);
     }
 });
+/**
+ * @swagger
+ * /workout/{id}:
+ *   get:
+ *     summary: Get a workout by ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the workout to retrieve.
+ *         schema:
+ *           type: integer
+ *           format: int64
+ *     responses:
+ *       200:
+ *         description: A workout object.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Workout'
+ *       404:
+ *         description: Workout not found.
+ */
+workoutRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const user = await workoutService.getWorkoutById(Number(req.params.id));
+        res.status(200).json(user);
+    } catch (error) {
+        const err=error as Error;
+        res.status(400).json({ status: 'error', errorMessage: err.message });
+    }
+});
 
 /**
  * @swagger
