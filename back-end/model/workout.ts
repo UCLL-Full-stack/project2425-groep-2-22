@@ -1,5 +1,6 @@
-import { Exercise } from "./exercise";
+import  {Exercise}  from "./exercise";
 import { User } from "./user";
+import {Workout as workoutPrisma, Post as postPrisma, User as UserPrisma, Exercise as exercisePrisma} from '@prisma/client';
 
 export class Workout {
     private id?: number;
@@ -100,5 +101,26 @@ export class Workout {
             this.user === workout.getUser() &&
             this.exercises === workout.getExercises()
         );
+    }
+    static from({
+        id,
+        name,
+        intensity,
+        type,
+        duration,
+        calories,
+        user,
+        exercises
+    }: workoutPrisma & { user: UserPrisma; exercises: exercisePrisma[] }): Workout {
+        return new Workout({
+            id,
+            name,
+            intensity,
+            type,
+            duration,
+            calories,
+            user: User.from(user), 
+            exercises: exercises.map((exercise) => Exercise.from(exercise))
+        });
     }
 }

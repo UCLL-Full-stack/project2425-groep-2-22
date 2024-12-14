@@ -1,18 +1,77 @@
 import { User } from '../model/user';
-const users = [
-    new User({ id: 1, username: 'admin', password: 'admin', workouts: [] }),
-    new User({ id: 2, username: 'John', password: 'Wachtwoord1', workouts: [] }),
-    new User({ id: 3, username: 'Jane', password: 'Wachtwoord2', workouts: [] }),
-]
-const getAllUsers  = async (): Promise<User[]> => {
-    return users;
-}
-const getUserById = ({ id }: { id: number }): User | null => {
+import { Workout } from '../model/workout'; 
+import { Post } from '../model/post';
+import database from '../util/database';
+import { UserInput } from '../types'; 
+import { User as UserPrisma, Workout as WorkoutPrisma, Post as PostPrisma } from '@prisma/client';
+
+const getAllUsers = async (): Promise<User[]> => {
     try {
-        return users.find((user) => user.getId() === id) || null;
+        const usersPrisma = await database.user.findMany({
+            include: {
+                posts: true,
+                workouts: true
+            }
+        });
+        return usersPrisma.map((userPrisma) => User.from(userPrisma));
     } catch (error) {
         console.error(error);
         throw new Error('Database error. See server log for details.');
     }
-}
-export default { getAllUsers, getUserById};
+};
+
+const getUserById = async ({ id }: { id: number }): Promise<User | null> => {
+    try {
+        const userPrisma = await database.user.findUnique({
+            where: { id },
+            include: {
+                posts: true,
+                workouts: true
+            }
+        });
+        return userPrisma ? User.from(userPrisma) : null;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
+const getUserByUsername = async ({ username }: { username: string }): Promise<User | null> => {
+    try {
+        const userPrisma = await database.user.findFirst({
+            where: { username },
+            include: {
+                posts: true,
+                workouts: true
+            }
+        });
+        return userPrisma ? User.from(userPrisma) : null;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
+const createUser = async ({ username, password}: UserInput ): Promise<User> => {
+    try {
+        const userPrisma = await database.user.create({
+            data: {
+                username,
+                password,
+            },
+        });
+        return User.from(userPrisma);
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
+
+
+export default {
+    getAllUsers,
+    getUserById,
+    getUserByUsername,
+    createUser
+};

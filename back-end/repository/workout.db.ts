@@ -1,44 +1,69 @@
 import { Workout } from '../model/workout';
 import { User } from '../model/user';
 import { Exercise } from '../model/exercise';
-const workouts = [
-    new Workout({ 
-        id: 1,
-        name: 'My custom workout',
-        intensity: 'Hoog', 
-        type: 'Cardio', 
-        duration: 30, 
-        calories: 200, 
-        user: new User({ id: 3, username: 'user3', password: 'Wachtwoorduser3', workouts: [] }), 
-        exercises: [] }),
-]
-const getAllWorkouts  = async (): Promise<Workout[]> => {
-    return workouts;
-}
-const createWorkout = ({ name, intensity, type, duration, calories, user, exercises }: { name: string, intensity: string, type: string, duration: number, calories: number, user: User, exercises: Exercise[] }): Workout => {
-    const workout = new Workout({ name, intensity, type, duration, calories, user, exercises });
-    workouts.push(workout);
-    return workout;
-}
-const getWorkoutById = ({ id }: { id: number }): Workout | null => {
+import database from '../util/database';
+import { WorkoutInput } from '../types';
+import { Workout as WorkoutPrisma, User as UserPrisma, Exercise as ExercisePrisma } from '@prisma/client';
+import { create } from 'domain';
+
+const getAllWorkouts = async (): Promise<Workout[]> => {
     try {
-        return workouts.find((workout) => workout.getId() === id) || null;
+        const workoutsPrisma = await database.workout.findMany({
+            include: {
+                user: true,
+                exercises: true
+            }
+        });
+        return workoutsPrisma.map((workoutPrisma) => Workout.from(workoutPrisma));
     } catch (error) {
         console.error(error);
         throw new Error('Database error. See server log for details.');
     }
 };
 
-const addExerciseToWorkout = async (workout: Workout, exercise: Exercise): Promise<Workout> => {
-    workout.getExercises().push(exercise);
-    return workout;
-}
-const findExerciseInWorkout = async (workoutId: number, exerciseId: number): Promise<boolean> => {
-    const workout = await getWorkoutById({ id: workoutId });
-    if (!workout) {
-        throw new Error("Workout does not exist");
+const getWorkoutById = async ({ id }: { id: number }): Promise<Workout | null> => {
+    try {
+        const workoutPrisma = await database.workout.findUnique({
+            where: { id },
+            include: {
+                user: true,
+                exercises: true
+            }
+        });
+        return workoutPrisma ? Workout.from(workoutPrisma) : null;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
     }
-    const exercise = workout.getExercises().find((exercise) => exercise.getId() === exerciseId);
-    return exercise ? true : false;
-}
-export default { getAllWorkouts, createWorkout, getWorkoutById, addExerciseToWorkout, findExerciseInWorkout};
+};
+const createWorkout = async ({ name, intensity, type, duration, calories, user }: WorkoutInput): Promise<Workout> => {
+    try {
+        const workoutPrisma = await database.workout.create({
+            data: {
+                name,
+                intensity,
+                type,
+                duration,
+                calories,
+                user: {
+                    connect: { id: user.id }
+                }
+            },
+            include: {
+                user: true,
+                exercises: true,
+            },
+        });
+        return Workout.from(workoutPrisma);
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
+
+export default {
+    getAllWorkouts,
+    getWorkoutById,
+    createWorkout
+};

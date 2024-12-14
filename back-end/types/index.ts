@@ -1,22 +1,23 @@
-type userInput = {
+type UserInput = {
     id?: number;
     username: string;
     password: string;
-    workouts: workoutInput[];
-}
+    workouts?: WorkoutInput[];
+    posts?: PostInput[];
+};
 
-type workoutInput = {
+type WorkoutInput = {
     id?: number;
     name: string;
     intensity: string;
     type: string;
     duration: number;
     calories: number;
-    user: userInput;
-    exercises: exerciseInput[];
-}
+    user: UserInput;
+    exercises?: ExerciseInput[];
+};
 
-type exerciseInput = {
+type ExerciseInput = {
     id?: number;
     name: string;
     description: string;
@@ -24,5 +25,15 @@ type exerciseInput = {
     reps: number;
     rest: number;
     muscleGroup: string;
-}
-export { userInput, workoutInput, exerciseInput };
+};
+
+type PostInput = {
+    id?: number;
+    title: string;
+    description: string;
+    rating: number;
+    user: UserInput;
+    createdAt?: Date;
+};
+
+export { UserInput, WorkoutInput, ExerciseInput, PostInput };

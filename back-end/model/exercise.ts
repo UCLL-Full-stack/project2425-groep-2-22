@@ -1,4 +1,5 @@
 import { Workout } from "./workout";
+import {Workout as workoutPrisma, Post as postPrisma, User as UserPrisma, Exercise as exercisePrisma} from '@prisma/client';
 
 export class Exercise {
     private id?: number;
@@ -87,5 +88,24 @@ export class Exercise {
             this.rest === exercise.getRest() &&
             this.muscleGroup === exercise.getMuscleGroup()
         );
+    }
+    static from({
+        id,
+        name,
+        description,
+        sets,
+        reps,
+        rest,
+        muscleGroup
+    }: exercisePrisma): Exercise {
+        return new Exercise({
+            id,
+            name,
+            description,
+            sets,
+            reps,
+            rest,
+            muscleGroup
+        });
     }
 }

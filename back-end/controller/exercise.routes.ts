@@ -1,11 +1,6 @@
 /**
  * @swagger
  * components:
- *   securitySchemes:
- *     bearerAuth:
- *       type: http
- *       scheme: bearer
- *       bearerFormat: JWT
  *   schemas:
  *     Exercise:
  *       type: object
@@ -13,6 +8,7 @@
  *         id:
  *           type: number
  *           format: int64
+ *           description: The unique identifier for an exercise.
  *         name:
  *           type: string
  *           description: The name of the exercise.
@@ -24,15 +20,14 @@
  *           description: The number of sets for the exercise.
  *         reps:
  *           type: number
- *           description: The number of repetitions for each set.
+ *           description: The number of reps per set.
  *         rest:
  *           type: number
- *           description: The rest time (in seconds) between sets.
+ *           description: The rest period in seconds between sets.
  *         muscleGroup:
  *           type: string
- *           description: The muscle group targeted by the exercise.
+ *           description: The targeted muscle group for the exercise.
  */
-
 import express, { NextFunction, Request, Response } from 'express';
 import exerciseService from '../service/exercise.service';
 
@@ -57,6 +52,37 @@ exerciseRouter.get('/', async (req: Request, res: Response, next: NextFunction) 
     try {
         const exercises = await exerciseService.getAllExercises();
         res.status(200).json(exercises);
+    } catch (error) {
+        next(error);
+    }
+});
+
+/**
+ * @swagger
+ * /exercise/{id}:
+ *   get:
+ *     summary: Get an exercise by ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: The exercise ID.
+ *     responses:
+ *       200:
+ *         description: An exercise object.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Exercise'
+ *       404:
+ *         description: Exercise not found.
+ */
+exerciseRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const user = await exerciseService.getExerciseById(Number(req.params.id));
+        res.status(200).json(user);
     } catch (error) {
         next(error);
     }

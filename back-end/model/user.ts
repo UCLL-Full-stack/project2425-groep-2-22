@@ -1,28 +1,24 @@
 import { Workout } from "./workout";
+import { Post } from "./post";
+import {Workout as workoutPrisma, Post as postPrisma, User as UserPrisma} from '@prisma/client';
 
 export class User {
     private id?: number;
     private username: string;
     private password: string;
-    private workouts: Workout[];
     constructor(user: {
         id?: number;
         username: string;
         password: string;
-        workouts: Workout[];
     }) {
         this.validate(user);
-        this.id = user.id;
+        this.id = user.id
         this.username = user.username;
         this.password = user.password;
-        this.workouts = user.workouts;
     }
 
     getId(): number | undefined {
         return this.id;
-    }
-    getWorkouts(): Workout[] {
-        return this.workouts;
     }
 
     getUsername(): string {
@@ -33,9 +29,9 @@ export class User {
     }
 
     validate(user: {
+        id?: number;
         username: string;
         password: string;
-        workouts: Workout[];
     }) {
         if (!user.username?.trim()) {
             throw new Error('Username is required');
@@ -43,16 +39,23 @@ export class User {
         if (!user.password?.trim()) {
             throw new Error('Password is required');
         }
-        if (!user.workouts) {
-            throw new Error('Workouts are required');
-        }
     }
 
     equals(user: User): boolean {
         return (
             this.username === user.getUsername() &&
-            this.password === user.getPassword() &&
-            this.workouts === user.getWorkouts()
+            this.password === user.getPassword() 
         );
+    }
+    static from({
+        id,
+        username,
+        password,
+    }: UserPrisma ): User {
+        return new User({
+            id,
+            username,
+            password,
+        });
     }
 }
