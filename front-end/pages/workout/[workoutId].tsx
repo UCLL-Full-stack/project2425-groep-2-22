@@ -2,6 +2,7 @@ import Header from "@/components/header";
 import WorkoutInfo from "@/components/workout/WorkoutInfo";
 import WorkoutService from "@/services/WorkoutService";
 import { Workout } from "@/types";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -31,7 +32,6 @@ const workOutById: React.FC = () => {
             </Head>
             <Header />
             <main>
-                <h1>{workout?.name}</h1>
                 {!workout && <p>Loading</p>}
                 {workout && (
                     <section>
@@ -41,6 +41,14 @@ const workOutById: React.FC = () => {
             </main>
         </>
     );
+};
+export const getServerSideProps = async (context : any) => {
+  const { locale } = context;
+  return {
+    props: {
+      ...(await serverSideTranslations(locale ?? "en", ['common']))
+    },
+  };
 };
 
 export default workOutById;

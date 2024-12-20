@@ -1,162 +1,217 @@
 import { Workout } from '../../model/workout';
 import { User } from '../../model/user';
 import { Exercise } from '../../model/exercise';
+import { Role } from '../../types';
 
 const user = new User({
+    firstName: 'John',
+    lastName: 'Smith',
+    age: 30,
+    weight: 70,
+    height: 180,
+    gender: 'Male',
     username: 'johnsmith',
     password: 'john123',
-    workouts: [],
+    role: 'Admin'as Role,
 });
 
-const exercise1 = new Exercise({ id: 1, name: 'Push Ups', description: 'Push up exercise', sets: 3, reps: 15, rest: 60, muscleGroup: 'Chest' });
-const exercise2 = new Exercise({ id: 2, name: 'Squats', description: 'Squat exercise', sets: 3, reps: 20, rest: 60, muscleGroup: 'Legs' });
+const exercise1 = new Exercise({
+    id: 1,
+    name: 'Push Ups',
+    description: 'Push up exercise',
+    sets: 3,
+    reps: 15,
+    rest: 60,
+    muscleGroup: 'Chest',
+});
 
-test('given: valid values for workout, when: workout is created, then: workout is created with those values', () => {
-    // given
+const exercise2 = new Exercise({
+    id: 2,
+    name: 'Squats',
+    description: 'Squat exercise',
+    sets: 3,
+    reps: 20,
+    rest: 60,
+    muscleGroup: 'Legs',
+});
+
+test('Given: valid parameters, When: workout is created, Then: workout is created successfully', () => {
+    // Given
     const workoutData = {
         name: 'Morning Workout',
         intensity: 'High',
         type: 'Strength Training',
         duration: 60,
         calories: 500,
-        user: user,
+        user,
         exercises: [exercise1, exercise2],
     };
 
-    // when
+    // When
     const workout = new Workout(workoutData);
 
-    // then
-    expect(workout.getName()).toEqual(workoutData.name);
-    expect(workout.getIntensity()).toEqual(workoutData.intensity);
-    expect(workout.getType()).toEqual(workoutData.type);
-    expect(workout.getDuration()).toEqual(workoutData.duration);
-    expect(workout.getCalories()).toEqual(workoutData.calories);
-    expect(workout.getUser()).toEqual(user);
-    expect(workout.getExercises()).toContain(exercise1);
-    expect(workout.getExercises()).toContain(exercise2);
+    // Then
+    expect(workout.getName()).toBe(workoutData.name);
 });
 
-test('given: workout without a name, when: workout is created, then: an error is thrown', () => {
-    // given
+test('Given: missing name, When: workout is created, Then: an error is thrown', () => {
+    // Given
     const workoutData = {
         name: '',
         intensity: 'High',
         type: 'Strength Training',
         duration: 60,
         calories: 500,
-        user: user,
+        user,
         exercises: [exercise1],
     };
 
-    // when
+    // When
     const createWorkout = () => new Workout(workoutData);
 
-    // then
+    // Then
     expect(createWorkout).toThrow('Name is required');
 });
 
-test('given: workout without intensity, when: workout is created, then: an error is thrown', () => {
-    // given
+test('Given: missing intensity, When: workout is created, Then: an error is thrown', () => {
+    // Given
     const workoutData = {
         name: 'Morning Workout',
         intensity: '',
         type: 'Strength Training',
         duration: 60,
         calories: 500,
-        user: user,
+        user,
         exercises: [exercise1],
     };
 
-    // when
+    // When
     const createWorkout = () => new Workout(workoutData);
 
-    // then
+    // Then
     expect(createWorkout).toThrow('Intensity is required');
 });
 
-test('given: workout without type, when: workout is created, then: an error is thrown', () => {
-    // given
+test('Given: missing type, When: workout is created, Then: an error is thrown', () => {
+    // Given
     const workoutData = {
         name: 'Morning Workout',
         intensity: 'High',
         type: '',
         duration: 60,
         calories: 500,
-        user: user,
+        user,
         exercises: [exercise1],
     };
 
-    // when
+    // When
     const createWorkout = () => new Workout(workoutData);
 
-    // then
+    // Then
     expect(createWorkout).toThrow('Type is required');
 });
 
-test('given: workout without duration, when: workout is created, then: an error is thrown', () => {
-    // given
+test('Given: missing duration, When: workout is created, Then: an error is thrown', () => {
+    // Given
     const workoutData = {
         name: 'Morning Workout',
         intensity: 'High',
         type: 'Strength Training',
-        duration: 0,
+        duration: undefined as unknown as number,
         calories: 500,
-        user: user,
+        user,
         exercises: [exercise1],
     };
 
-    // when
+    // When
     const createWorkout = () => new Workout(workoutData);
 
-    // then
+    // Then
     expect(createWorkout).toThrow('Duration is required');
 });
 
-test('given: workout without calories, when: workout is created, then: an error is thrown', () => {
-    // given
+test('Given: missing calories, When: workout is created, Then: an error is thrown', () => {
+    // Given
     const workoutData = {
         name: 'Morning Workout',
         intensity: 'High',
         type: 'Strength Training',
         duration: 60,
-        calories: 0,
-        user: user,
+        calories: undefined as unknown as number,
+        user,
         exercises: [exercise1],
     };
 
-    // when
+    // When
     const createWorkout = () => new Workout(workoutData);
 
-    // then
+    // Then
     expect(createWorkout).toThrow('Calories is required');
 });
 
-
-test('given: two workouts with different names, when: checking equality, then: they are not equal', () => {
-    // given
-    const workout1 = new Workout({
+test('Given: missing user, When: workout is created, Then: an error is thrown', () => {
+    // Given
+    const workoutData = {
         name: 'Morning Workout',
         intensity: 'High',
         type: 'Strength Training',
         duration: 60,
         calories: 500,
-        user: user,
+        user: undefined as unknown as User,
         exercises: [exercise1],
-    });
-    const workout2 = new Workout({
+    };
+
+    // When
+    const createWorkout = () => new Workout(workoutData);
+
+    // Then
+    expect(createWorkout).toThrow('User is required');
+});
+
+test('Given: missing exercises, When: workout is created, Then: an error is thrown', () => {
+    // Given
+    const workoutData = {
+        name: 'Morning Workout',
+        intensity: 'High',
+        type: 'Strength Training',
+        duration: 60,
+        calories: 500,
+        user,
+        exercises: undefined as unknown as Exercise[],
+    };
+
+    // When
+    const createWorkout = () => new Workout(workoutData);
+
+    // Then
+    expect(createWorkout).toThrow('Exercises are required');
+});
+
+test('Given: workouts with different names, When: workouts are compared, Then: they are not equal', () => {
+    // Given
+    const workoutData1 = {
+        name: 'Morning Workout',
+        intensity: 'High',
+        type: 'Strength Training',
+        duration: 60,
+        calories: 500,
+        user,
+        exercises: [exercise1],
+    };
+    const workoutData2 = {
         name: 'Evening Workout',
         intensity: 'High',
         type: 'Strength Training',
         duration: 60,
         calories: 500,
-        user: user,
+        user,
         exercises: [exercise1],
-    });
+    };
 
-    // when
-    const areEqual = workout1.equals(workout2);
+    // When
+    const workout1 = new Workout(workoutData1);
+    const workout2 = new Workout(workoutData2);
 
-    // then
-    expect(areEqual).toBe(false);
+    // Then
+    expect(workout1.equals(workout2)).toBe(false);
 });

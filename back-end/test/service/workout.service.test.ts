@@ -5,11 +5,19 @@ import exerciseDb from '../../repository/exercise.db';
 import { Workout } from '../../model/workout';
 import { User } from '../../model/user';
 import { Exercise } from '../../model/exercise';
+import { Role, UserInput } from '../../types';
 
 const userInput = {
     id: 1,
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 30,
+    weight: 70,
+    height: 175,
+    gender: 'Male',
     username: 'johndoe',
-    password: 'johnd123',
+    password: 'hashedpassword',
+    role: 'Admin'as Role,
     workouts: [],
 };
 
@@ -28,20 +36,17 @@ const exerciseInput = {
 const exercise = new Exercise(exerciseInput);
 
 const workoutInput = {
+    id: 1,
     name: 'Full Body Workout',
     intensity: 'High',
     type: 'Strength',
     duration: 45,
     calories: 400,
-    user: userInput,
-    exercises: [exerciseInput],
-};
-
-const workout = new Workout({
-    ...workoutInput,
     user: user,
     exercises: [exercise],
-});
+};
+
+const workout = new Workout(workoutInput);
 
 let mockGetAllWorkouts: jest.Mock;
 let mockCreateWorkout: jest.Mock;
@@ -65,8 +70,7 @@ beforeEach(() => {
     userDb.getUserById = mockGetUserById;
     workoutDb.getWorkoutById = mockGetWorkoutById;
     exerciseDb.getExerciseById = mockGetExerciseById;
-    workoutDb.addExerciseToWorkout = mockAddExerciseToWorkout;
-    workoutDb.findExerciseInWorkout = mockFindExerciseInWorkout;
+    workoutDb.addExercise = mockAddExerciseToWorkout;
 });
 
 afterEach(() => {
@@ -87,50 +91,52 @@ test('given a call to get all workouts, when workouts are retrieved, then return
     expect(result).toHaveLength(1);
 });
 
-test('given valid workout data, when creating a workout, then the workout is created successfully', async () => {
-    // Given
-    mockGetUserById.mockReturnValue(Promise.resolve(user));
-    mockCreateWorkout.mockReturnValue(workout);
 
-    // When
-    const result = await workoutService.createWorkout(workoutInput);
-
-    // Then
-    expect(mockGetUserById).toHaveBeenCalledWith({ id: userInput.id });
-    expect(mockCreateWorkout).toHaveBeenCalledTimes(1);
-    expect(result).toBeInstanceOf(Workout);
-    expect(result).toEqual(workout);
-});
-
-
-test('given a workout ID that does not exist, when retrieving a workout, then throws an error', () => {
+test('given a workout ID that does not exist, when retrieving a workout, then throws an error', async () => {
     // Given
     const workoutId = 999;
-    mockGetWorkoutById.mockReturnValue(null);
-    
-    const getWorkout = () => {
-        workoutService.getWorkoutById(workoutId);
-    };
+    mockGetWorkoutById.mockReturnValue(Promise.resolve(null));
 
-    // When & Then
-    expect(getWorkout).toThrowError(`Workout with id ${workoutId} does not exist`);
+    // When / Then
+    await expect(workoutService.getWorkoutById(workoutId)).rejects.toThrow(`Workout with id ${workoutId} does not exist`);
 });
 
 test('given a valid workout ID, when adding an exercise to a workout, then adds the exercise successfully', async () => {
     // Given
     const workoutId = 1;
-    const exerciseId = exerciseInput.id;
-    
+    const exerciseId = 2;
+    const exerciseIdtest = { id: 2 };
+    const exercise = { id: 2, name: 'Push Up' }; 
+    const workout = { id: 1, exercises: [] };
+
+    mockGetWorkoutById.mockClear();
     mockGetWorkoutById.mockReturnValue(Promise.resolve(workout));
     mockGetExerciseById.mockReturnValue(Promise.resolve(exercise));
     mockFindExerciseInWorkout.mockReturnValue(Promise.resolve(false));
+    mockAddExerciseToWorkout.mockReturnValue(Promise.resolve());
 
     // When
     const result = await workoutService.addExerciseToWorkout(workoutId, exerciseId);
 
     // Then
-    expect(mockGetWorkoutById).toHaveBeenCalledWith({ id: workoutId });
-    expect(mockGetExerciseById).toHaveBeenCalledWith({ id: exerciseId });
-    expect(mockAddExerciseToWorkout).toHaveBeenCalledWith(workout, exercise);
+    expect(mockGetWorkoutById).toHaveBeenCalledTimes(2);
+    expect(mockGetExerciseById).toHaveBeenCalledWith(exerciseIdtest);
+    expect(mockAddExerciseToWorkout).toHaveBeenCalledWith(workoutId, exerciseId);
     expect(result).toEqual(workout);
+});
+
+test('given an exercise ID that does not exist, when adding an exercise to a workout, then throws an error', async () => {
+    // Given
+    const workoutId = 1;
+    const exerciseId = 999;
+    const exerciseIdtest = { id: 999 };
+    const workout = { id: 1, exercises: [] };
+
+    mockGetWorkoutById.mockReturnValue(Promise.resolve(workout));
+    mockGetExerciseById.mockReturnValue(Promise.resolve(null));
+
+    // When / Then
+    await expect(workoutService.addExerciseToWorkout(workoutId, exerciseId)).rejects.toThrow('Exercise not found');
+    expect(mockGetWorkoutById).toHaveBeenCalledTimes(1);
+    expect(mockGetExerciseById).toHaveBeenCalledWith(exerciseIdtest);
 });

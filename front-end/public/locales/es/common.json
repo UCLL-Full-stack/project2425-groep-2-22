@@ -1,0 +1,116 @@
+{
+  "app": {
+    "title": "myFit"
+  },
+  "header": {
+    "nav": {
+      "home": "Inicio",
+      "profile": "Perfil",
+      "workout": "Entrenamiento",
+      "exercises": "Ejercicios",
+      "posts": "Publicaciones",
+      "login": "Iniciar sesión",
+      "logout": "Cerrar sesión"
+    },
+    "welcome": "Bienvenido"
+  },
+  "profile": {
+    "page": {
+      "title": "Perfil",
+      "loading": "Cargando..."
+    },
+    "user": {
+      "title": "Perfil de Usuario",
+      "info": {
+        "fullName": "Nombre completo",
+        "username": "Nombre de usuario",
+        "age": "Edad",
+        "gender": "Género",
+        "height": "Altura",
+        "weight": "Peso",
+        "role": "Rol"
+      },
+      "metrics": {
+        "bmi": "Índice de Masa Corporal (IMC)",
+        "ibw": "Peso Corporal Ideal (PCI)",
+        "bmr": "Tasa Metabólica Basal (TMB)"
+      },
+      "units": {
+        "height": "cm",
+        "weight": "kg",
+        "bmr": "kcal/día"
+      }
+    }
+  },
+  "workout": {
+    "overview": {
+      "table": {
+        "name": "Nombre",
+        "type": "Tipo",
+        "intensity": "Intensidad",
+        "duration": "Duración",
+        "calories": "Calorías",
+        "delete": "Eliminar"
+      },
+      "duration": {
+        "minute": "minutos"
+      },
+      "rest": {
+        "seconds": "segundos"
+      },
+      "addExerciseButton": "Añadir al entrenamiento",
+      "removeButton": "Eliminar"
+    },
+    "exercises": {
+      "table": {
+        "name": "Nombre",
+        "description": "Descripción",
+        "sets": "Series",
+        "reps": "Repeticiones",
+        "rest": "Descanso",
+        "muscleGroup": "Grupo muscular"
+      },
+      "exerciseFor": "Ejercicios para"
+    },
+    "workouts": {
+      "page": {
+        "title": "Mis entrenamientos",
+        "loading": "Cargando..."
+      },
+      "addWorkoutButton": "+ Añadir entrenamiento",
+      "removeWorkoutError": "Error al eliminar entrenamiento",
+      "removeWorkoutSuccess": "Entrenamiento eliminado con éxito"
+    }
+  },
+  "home": {
+    "users": "Usuarios",
+    "username": "Nombre de usuario",
+    "password": "Contraseña",
+    "role": "Rol",
+    "welcome": {
+      "title": "¡Bienvenido a MyFit!",
+      "description": "¡MyFit es tu compañero personal de fitness, donde puedes crear entrenamientos personalizados añadiendo ejercicios! Construye y sigue tu propio viaje de fitness, descubre nuevos entrenamientos y comparte tu progreso con nuestra increíble comunidad."
+    },
+    "whatYouCanDo": {
+      "title": "Lo que puedes hacer",
+      "action1": "Crear entrenamientos personalizados y añadir ejercicios",
+      "action2": "Compartir tus entrenamientos con valoraciones o pedir consejos",
+      "action3": "Ser parte de una comunidad de fitness vibrante",
+      "action4": "Los administradores y entrenadores pueden crear y gestionar ejercicios",
+      "action5": "Sigue tu progreso con tu perfil personal, incluyendo el IMC y otras métricas de fitness"
+    },
+    "community": {
+      "title": "Nuestra comunidad",
+      "description": "Únete a una comunidad de entusiastas del fitness, donde puedes compartir tus entrenamientos, obtener retroalimentación e inspirar a los demás a lograr sus metas de fitness. ¡No importa si eres principiante o experto, damos la bienvenida a todos los niveles de fitness!"
+    },
+    "profile": {
+      "title": "Tu perfil",
+      "description": "Gestiona tu perfil personal, sigue tu progreso y obtén información detallada sobre tu viaje de fitness, incluyendo IMC, historial de entrenamientos y más.",
+      "imagePlaceholder": "* Las imágenes del perfil del usuario, estadísticas de fitness, etc. irán aquí"
+    },
+    "start": {
+      "title": "Comienza tu viaje de fitness",
+      "getStarted": "Empezar"
+    }
+  }
+}

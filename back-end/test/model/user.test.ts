@@ -1,50 +1,175 @@
 import { User } from '../../model/user';
-import { Workout } from '../../model/workout';
-
-const workout1 = new Workout({ 
-    id: 1, 
-    name: 'Morning Run', 
-    intensity: 'Medium', 
-    type: 'Cardio', 
-    duration: 30, 
-    calories: 300, 
-    user: new User({ username: 'johnsmith', password: 'john123', workouts: [] }), 
-    exercises: [] 
-});
-const workout2 = new Workout({ 
-    id: 2, 
-    name: 'Strength Training', 
-    intensity: 'High', 
-    type: 'Strength', 
-    duration: 45, 
-    calories: 450, 
-    user: new User({ username: 'johnsmith', password: 'john123', workouts: [] }), 
-    exercises: [] 
-});
+import { Role } from '../../types';
 
 test('given: valid values for user, when: user is created, then: user is created with those values', () => {
     // given
     const user = {
+        id: 1,
+        firstName: 'John',
+        lastName: 'Smith',
+        age: 30,
+        weight: 70,
+        height: 175,
+        gender: 'Male',
         username: 'johnsmith',
         password: 'john123',
-        workouts: [workout1],
+        role: 'Admin'as Role,
     };
 
     // when
     const newUser = new User(user);
 
     // then
+    expect(newUser.getId()).toEqual(user.id);
+    expect(newUser.getFirstName()).toEqual(user.firstName);
+    expect(newUser.getLastName()).toEqual(user.lastName);
+    expect(newUser.getAge()).toEqual(user.age);
+    expect(newUser.getWeight()).toEqual(user.weight);
+    expect(newUser.getHeight()).toEqual(user.height);
+    expect(newUser.getGender()).toEqual(user.gender);
     expect(newUser.getUsername()).toEqual(user.username);
     expect(newUser.getPassword()).toEqual(user.password);
-    expect(newUser.getWorkouts()).toContain(workout1);
+    expect(newUser.getRole()).toEqual(user.role);
+});
+
+test('given: user without a first name, when: user is created, then: an error is thrown', () => {
+    // given
+    const userWithoutFirstName = {
+        firstName: '',
+        lastName: 'Smith',
+        age: 30,
+        weight: 70,
+        height: 175,
+        gender: 'Male',
+        username: 'johnsmith',
+        password: 'john123',
+        role: ''as any,
+    };
+
+    // when
+    const createUser = () => new User(userWithoutFirstName);
+
+    // then
+    expect(createUser).toThrow('First name is required');
+});
+
+test('given: user without a last name, when: user is created, then: an error is thrown', () => {
+    // given
+    const userWithoutLastName = {
+        firstName: 'John',
+        lastName: '',
+        age: 30,
+        weight: 70,
+        height: 175,
+        gender: 'Male',
+        username: 'johnsmith',
+        password: 'john123',
+        role: ''as any,
+    };
+
+    // when
+    const createUser = () => new User(userWithoutLastName);
+
+    // then
+    expect(createUser).toThrow('Last name is required');
+});
+
+test('given: user without an age, when: user is created, then: an error is thrown', () => {
+    // given
+    const userWithoutAge = {
+        firstName: 'John',
+        lastName: 'Smith',
+        age: 0,
+        weight: 70,
+        height: 175,
+        gender: 'Male',
+        username: 'johnsmith',
+        password: 'john123',
+        role: ''as any,
+    };
+
+    // when
+    const createUser = () => new User(userWithoutAge);
+
+    // then
+    expect(createUser).toThrow('Age is required');
+});
+
+test('given: user with a negative weight, when: user is created, then: an error is thrown', () => {
+    // given
+    const userWithoutWeight = {
+        firstName: 'John',
+        lastName: 'Smith',
+        age: 30,
+        height: 175,
+        weight : -70,
+        gender: 'Male',
+        username: 'johnsmith',
+        password: 'john123',
+        role: ''as any,
+    };
+
+    // when
+    const createUser = () => new User(userWithoutWeight);
+
+    // then
+    expect(createUser).toThrow('Weight is required');
+});
+
+test('given: user with a negative height, when: user is created, then: an error is thrown', () => {
+    // given
+    const userWithoutHeight = {
+        firstName: 'John',
+        lastName: 'Smith',
+        age: 30,
+        height: -175,
+        weight: 70,
+        gender: 'Male',
+        username: 'johnsmith',
+        password: 'john123',
+        role: ''as any,
+    };
+
+    // when
+    const createUser = () => new User(userWithoutHeight);
+
+    // then
+    expect(createUser).toThrow('Height is required');
+});
+
+test('given: user without a gender, when: user is created, then: an error is thrown', () => {
+    // given
+    const userWithoutGender = {
+        firstName: 'John',
+        lastName: 'Smith',
+        age: 30,
+        weight: 70,
+        height: 175,
+        gender: '',
+        username: 'johnsmith',
+        password: 'john123',
+        role: ''as any,
+    };
+
+    // when
+    const createUser = () => new User(userWithoutGender);
+
+    // then
+    expect(createUser).toThrow('Gender is required');
 });
 
 test('given: user without a username, when: user is created, then: an error is thrown', () => {
     // given
     const userWithoutUsername = {
+        firstName: 'John',
+        lastName: 'Smith',
+        age: 30,
+        weight: 70,
+        height: 175,
+        gender: 'Male',
         username: '',
         password: 'john123',
-        workouts: [workout1],
+        role: ''as any,
     };
 
     // when
@@ -57,9 +182,15 @@ test('given: user without a username, when: user is created, then: an error is t
 test('given: user without a password, when: user is created, then: an error is thrown', () => {
     // given
     const userWithoutPassword = {
+        firstName: 'John',
+        lastName: 'Smith',
+        age: 30,
+        weight: 70,
+        height: 175,
+        gender: 'Male',
         username: 'johnsmith',
         password: '',
-        workouts: [workout1],
+        role: ''as any,
     };
 
     // when
@@ -69,39 +200,23 @@ test('given: user without a password, when: user is created, then: an error is t
     expect(createUser).toThrow('Password is required');
 });
 
-
-test('given: two users with different usernames, when: checking equality, then: they are not equal', () => {
+test('given: user without a role, when: user is created, then: an error is thrown', () => {
     // given
-    const user1 = new User({
+    const userWithoutRole = {
+        firstName: 'John',
+        lastName: 'Smith',
+        age: 30,
+        weight: 70,
+        height: 175,
+        gender: 'Male',
         username: 'johnsmith',
         password: 'john123',
-        workouts: [workout1],
-    });
-    const user2 = new User({
-        username: 'janedoe',
-        password: 'john123',
-        workouts: [workout1],
-    });
+        role: ''as any,
+    };
 
     // when
-    const areEqual = user1.equals(user2);
+    const createUser = () => new User(userWithoutRole);
 
     // then
-    expect(areEqual).toBe(false);
-});
-
-test('given: an existing user, when: adding a new workout, then: the workout is added to the user', () => {
-    // given
-    const user = new User({
-        username: 'johnsmith',
-        password: 'john123',
-        workouts: [],
-    });
-
-    // when
-    user.getWorkouts().push(workout1); // This simulates adding a workout
-
-    // then
-    expect(user.getWorkouts()).toContain(workout1);
-    expect(user.getWorkouts()).toHaveLength(1);
+    expect(createUser).toThrow('Role is required');
 });

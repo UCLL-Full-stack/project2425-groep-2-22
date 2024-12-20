@@ -77,10 +77,10 @@ export class Workout {
         if (!workout.type?.trim()) {
             throw new Error('Type is required');
         }
-        if (!workout.duration) {
+        if (workout.duration == null) {
             throw new Error('Duration is required');
         }
-        if (!workout.calories) {
+        if (workout.calories == null) {
             throw new Error('Calories is required');
         }
         if (!workout.user) {

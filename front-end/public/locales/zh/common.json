@@ -1,0 +1,117 @@
+{
+    "app": {
+      "title": "myFit"
+    },
+    "header": {
+      "nav": {
+        "home": "首页",
+        "profile": "个人资料",
+        "workout": "锻炼",
+        "exercises": "练习",
+        "posts": "帖子",
+        "login": "登录",
+        "logout": "登出"
+      },
+      "welcome": "欢迎"
+    },
+    "profile": {
+      "page": {
+        "title": "个人资料",
+        "loading": "加载中..."
+      },
+      "user": {
+        "title": "用户资料",
+        "info": {
+          "fullName": "全名",
+          "username": "用户名",
+          "age": "年龄",
+          "gender": "性别",
+          "height": "身高",
+          "weight": "体重",
+          "role": "角色"
+        },
+        "metrics": {
+          "bmi": "体质指数 (BMI)",
+          "ibw": "理想体重 (IBW)",
+          "bmr": "基础代谢率 (BMR)"
+        },
+        "units": {
+          "height": "厘米",
+          "weight": "千克",
+          "bmr": "千卡/天"
+        }
+      }
+    },
+    "workout": {
+      "overview": {
+        "table": {
+          "name": "名称",
+          "type": "类型",
+          "intensity": "强度",
+          "duration": "时长",
+          "calories": "卡路里",
+          "delete": "删除"
+        },
+        "duration": {
+          "minute": "分钟"
+        },
+        "rest": {
+          "seconds": "秒"
+        },
+        "addExerciseButton": "添加到锻炼",
+        "removeButton": "移除"
+      },
+      "exercises": {
+        "table": {
+          "name": "名称",
+          "description": "描述",
+          "sets": "组数",
+          "reps": "次数",
+          "rest": "休息",
+          "muscleGroup": "肌肉群"
+        },
+        "exerciseFor": "适合的锻炼"
+      },
+      "workouts": {
+        "page": {
+          "title": "我的锻炼",
+          "loading": "加载中..."
+        },
+        "addWorkoutButton": "+ 添加锻炼",
+        "removeWorkoutError": "删除锻炼失败",
+        "removeWorkoutSuccess": "锻炼已成功删除"
+      }
+    },
+    "home": {
+      "users": "用户",
+      "username": "用户名",
+      "password": "密码",
+      "role": "角色",
+      "welcome": {
+        "title": "欢迎来到 MyFit!",
+        "description": "MyFit 是你个人的健身伙伴，你可以通过添加锻炼来创建自定义锻炼。构建并跟踪你的健身之旅，发现新锻炼，并与我们精彩的社区分享你的进展！"
+      },
+      "whatYouCanDo": {
+        "title": "你可以做的事情",
+        "action1": "创建自定义锻炼并添加练习",
+        "action2": "分享你的锻炼，带有评分或寻求建议",
+        "action3": "成为充满活力的健身社区的一员",
+        "action4": "管理员和教练可以创建和管理练习",
+        "action5": "通过个人资料跟踪你的进展，包括 BMI 和其他健身指标"
+      },
+      "community": {
+        "title": "我们的社区",
+        "description": "加入一个健身爱好者的社区，你可以分享你的锻炼，获取反馈，并相互激励达成健身目标。无论你是初学者还是专家，我们欢迎所有健身水平的人！"
+      },
+      "profile": {
+        "title": "你的个人资料",
+        "description": "管理你的个人资料，跟踪你的进展，并获得详细的健身之旅见解，包括 BMI、锻炼历史等。",
+        "imagePlaceholder": "* 用户资料、健身统计等图片将在此展示"
+      },
+      "start": {
+        "title": "开始你的健身之旅",
+        "getStarted": "开始"
+      }
+    }
+  }
+  

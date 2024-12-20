@@ -1,0 +1,117 @@
+{
+    "app": {
+      "title": "myFit"
+    },
+    "header": {
+      "nav": {
+        "home": "Home",
+        "profile": "Profiel",
+        "workout": "Training",
+        "exercises": "Oefeningen",
+        "posts": "Berichten",
+        "login": "Inloggen",
+        "logout": "Uitloggen"
+      },
+      "welcome": "Welkom"
+    },
+    "profile": {
+      "page": {
+        "title": "Profiel",
+        "loading": "Laden..."
+      },
+      "user": {
+        "title": "Gebruikersprofiel",
+        "info": {
+          "fullName": "Volledige naam",
+          "username": "Gebruikersnaam",
+          "age": "Leeftijd",
+          "gender": "Geslacht",
+          "height": "Lengte",
+          "weight": "Gewicht",
+          "role": "Rol"
+        },
+        "metrics": {
+          "bmi": "Body Mass Index (BMI)",
+          "ibw": "Ideaal Lichaamsgewicht (IBW)",
+          "bmr": "Basale Metabolische Snelheid (BMR)"
+        },
+        "units": {
+          "height": "cm",
+          "weight": "kg",
+          "bmr": "kcal/dag"
+        }
+      }
+    },
+    "workout": {
+      "overview": {
+        "table": {
+          "name": "Naam",
+          "type": "Type",
+          "intensity": "Intensiteit",
+          "duration": "Duur",
+          "calories": "Calorieën",
+          "delete": "Verwijderen"
+        },
+        "duration": {
+          "minute": "minuten"
+        },
+        "rest": {
+          "seconds": "seconden"
+        },
+        "addExerciseButton": "Toevoegen aan training",
+        "removeButton": "Verwijderen"
+      },
+      "exercises": {
+        "table": {
+          "name": "Naam",
+          "description": "Beschrijving",
+          "sets": "Sets",
+          "reps": "Herhalingen",
+          "rest": "Rust",
+          "muscleGroup": "Spiergroep"
+        },
+        "exerciseFor": "Oefeningen voor"
+      },
+      "workouts": {
+        "page": {
+          "title": "Mijn trainingen",
+          "loading": "Laden..."
+        },
+        "addWorkoutButton": "+ Training toevoegen",
+        "removeWorkoutError": "Verwijderen van training mislukt",
+        "removeWorkoutSuccess": "Training succesvol verwijderd"
+      }
+    },
+    "home": {
+      "users": "Gebruikers",
+      "username": "Gebruikersnaam",
+      "password": "Wachtwoord",
+      "role": "Rol",
+      "welcome": {
+        "title": "Welkom bij MyFit!",
+        "description": "MyFit is je persoonlijke fitnesspartner, waar je aangepaste trainingen kunt maken door oefeningen toe te voegen. Bouw en volg je eigen fitnessreis, ontdek nieuwe trainingen en deel je voortgang met onze geweldige community!"
+      },
+      "whatYouCanDo": {
+        "title": "Wat je kunt doen",
+        "action1": "Maak aangepaste trainingen en voeg oefeningen toe",
+        "action2": "Deel je trainingen met beoordelingen of vraag om advies",
+        "action3": "Word onderdeel van een levendige fitnessgemeenschap",
+        "action4": "Beheerders en trainers kunnen oefeningen maken en beheren",
+        "action5": "Volg je voortgang met je persoonlijke profiel, inclusief BMI en andere fitnessstatistieken"
+      },
+      "community": {
+        "title": "Onze community",
+        "description": "Word lid van een community van fitnessliefhebbers, waar je je trainingen kunt delen, feedback kunt krijgen en elkaar kunt inspireren om je fitnessdoelen te bereiken. Of je nu een beginner of expert bent, we verwelkomen alle fitnessniveaus!"
+      },
+      "profile": {
+        "title": "Je profiel",
+        "description": "Beheer je persoonlijke profiel, volg je voortgang en krijg gedetailleerde inzichten in je fitnessreis, inclusief BMI, trainingsgeschiedenis en meer.",
+        "imagePlaceholder": "* Afbeeldingen van gebruikersprofielen, fitnessstatistieken, enz. komen hier"
+      },
+      "start": {
+        "title": "Begin je fitnessreis",
+        "getStarted": "Begin nu"
+      }
+    }
+  }
+  

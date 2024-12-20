@@ -1,0 +1,117 @@
+{
+    "app": {
+      "title": "myFit"
+    },
+    "header": {
+      "nav": {
+        "home": "Accueil",
+        "profile": "Profil",
+        "workout": "Entraînement",
+        "exercises": "Exercices",
+        "posts": "Publications",
+        "login": "Se connecter",
+        "logout": "Se déconnecter"
+      },
+      "welcome": "Bienvenue"
+    },
+    "profile": {
+      "page": {
+        "title": "Profil",
+        "loading": "Chargement..."
+      },
+      "user": {
+        "title": "Profil de l'utilisateur",
+        "info": {
+          "fullName": "Nom complet",
+          "username": "Nom d'utilisateur",
+          "age": "Âge",
+          "gender": "Sexe",
+          "height": "Taille",
+          "weight": "Poids",
+          "role": "Rôle"
+        },
+        "metrics": {
+          "bmi": "Indice de masse corporelle (IMC)",
+          "ibw": "Poids corporel idéal (PCI)",
+          "bmr": "Taux métabolique basal (TMB)"
+        },
+        "units": {
+          "height": "cm",
+          "weight": "kg",
+          "bmr": "kcal/jour"
+        }
+      }
+    },
+    "workout": {
+      "overview": {
+        "table": {
+          "name": "Nom",
+          "type": "Type",
+          "intensity": "Intensité",
+          "duration": "Durée",
+          "calories": "Calories",
+          "delete": "Supprimer"
+        },
+        "duration": {
+          "minute": "minutes"
+        },
+        "rest": {
+          "seconds": "secondes"
+        },
+        "addExerciseButton": "Ajouter à l'entraînement",
+        "removeButton": "Supprimer"
+      },
+      "exercises": {
+        "table": {
+          "name": "Nom",
+          "description": "Description",
+          "sets": "Séries",
+          "reps": "Répétitions",
+          "rest": "Repos",
+          "muscleGroup": "Groupe musculaire"
+        },
+        "exerciseFor": "Exercices pour"
+      },
+      "workouts": {
+        "page": {
+          "title": "Mes entraînements",
+          "loading": "Chargement..."
+        },
+        "addWorkoutButton": "+ Ajouter un entraînement",
+        "removeWorkoutError": "Échec de la suppression de l'entraînement",
+        "removeWorkoutSuccess": "Entraînement supprimé avec succès"
+      }
+    },
+    "home": {
+      "users": "Utilisateurs",
+      "username": "Nom d'utilisateur",
+      "password": "Mot de passe",
+      "role": "Rôle",
+      "welcome": {
+        "title": "Bienvenue sur MyFit !",
+        "description": "MyFit est votre compagnon personnel de fitness, où vous pouvez créer des entraînements personnalisés en ajoutant des exercices. Construisez et suivez votre propre parcours de fitness, découvrez de nouveaux entraînements et partagez vos progrès avec notre incroyable communauté."
+      },
+      "whatYouCanDo": {
+        "title": "Ce que vous pouvez faire",
+        "action1": "Créer des entraînements personnalisés et ajouter des exercices",
+        "action2": "Partager vos entraînements avec des évaluations ou demander des conseils",
+        "action3": "Faire partie d'une communauté de fitness dynamique",
+        "action4": "Les administrateurs et les entraîneurs peuvent créer et gérer des exercices",
+        "action5": "Suivez vos progrès avec votre profil personnel, y compris l'IMC et d'autres métriques de fitness"
+      },
+      "community": {
+        "title": "Notre communauté",
+        "description": "Rejoignez une communauté d'enthousiastes du fitness, où vous pouvez partager vos entraînements, obtenir des retours et inspirer les autres à atteindre leurs objectifs de fitness. Que vous soyez débutant ou expert, nous accueillons tous les niveaux de fitness !"
+      },
+      "profile": {
+        "title": "Votre profil",
+        "description": "Gérez votre profil personnel, suivez vos progrès et obtenez des informations détaillées sur votre parcours de fitness, y compris l'IMC, l'historique des entraînements et plus encore.",
+        "imagePlaceholder": "* Les images du profil utilisateur, des statistiques de fitness, etc. seront ici"
+      },
+      "start": {
+        "title": "Commencez votre parcours de fitness",
+        "getStarted": "Commencer"
+      }
+    }
+  }
+  

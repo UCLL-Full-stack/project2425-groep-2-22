@@ -1,0 +1,117 @@
+{
+    "app": {
+      "title": "myFit"
+    },
+    "header": {
+      "nav": {
+        "home": "Home",
+        "profile": "Profile",
+        "workout": "Workout",
+        "exercises": "Exercises",
+        "posts": "Posts",
+        "login": "Login",
+        "logout": "Logout"
+      },
+      "welcome": "Welcome"
+    },
+    "profile": {
+      "page": {
+      "title": "Profile",
+      "loading": "Loading..."
+      },
+      "user": {
+        "title": "User Profile",
+        "info": {
+          "fullName": "Full Name",
+          "username": "Username",
+          "age": "Age",
+          "gender": "Gender",
+          "height": "Height",
+          "weight": "Weight",
+          "role": "Role"
+        },
+        "metrics": {
+          "bmi": "Body Mass Index (BMI)",
+          "ibw": "Ideal Body Weight (IBW)",
+          "bmr": "Basal Metabolic Rate (BMR)"
+        },
+        "units": {
+          "height": "cm",
+          "weight": "kg",
+          "bmr": "kcal/day"
+        }
+      }
+    },
+    "workout": {
+      "overview": {
+        "table": {
+          "name": "Name",
+          "type": "Type",
+          "intensity": "Intensity",
+          "duration": "Duration",
+          "calories": "Calories",
+          "delete": "Delete"
+        },
+        "duration": {
+          "minute": "minutes"
+        },
+        "rest": {
+          "seconds": "seconds"
+        },
+      "addExerciseButton": "Add to Workout",
+      "removeButton": "Remove"
+      },
+      "exercises": {
+        "table": {
+          "name": "Name",
+          "description": "Description",
+          "sets": "Sets",
+          "reps": "Reps",
+          "rest": "Rest",
+          "muscleGroup": "Muscle Group"
+        },
+      "exerciseFor": "Exercises for"
+    },
+    "workouts": {
+      "page": {
+        "title": "My workouts",
+        "loading": "Loading..."
+      },
+      "addWorkoutButton": "+ Add Workout",
+      "removeWorkoutError": "Failed to remove workout",
+      "removeWorkoutSuccess": "Workout removed successfully"
+    }
+  },
+  "home": {
+    "users":"Users",
+    "username": "Username",
+    "password": "Password",
+    "role": "Role",
+    "welcome": {
+      "title": "Welcome to MyFit!",
+      "description": "MyFit is your personal fitness companion, where you can create custom workouts by adding exercises to them. Build and track your own fitness journey, discover new workouts, and share your progress with our amazing community!"
+    },
+    "whatYouCanDo": {
+      "title": "What You Can Do",
+      "action1": "Create custom workouts and add exercises",
+      "action2": "Share your workouts with ratings or ask for advice",
+      "action3": "Become part of a vibrant fitness community",
+      "action4": "Admins and trainers can create and manage exercises",
+      "action5": "Track your progress with your personal profile, including BMI and other fitness metrics"
+    },
+    "community": {
+      "title": "Our Community",
+      "description": "Join a community of fitness enthusiasts, where you can share your workouts, get feedback, and inspire each other to achieve your fitness goals. Whether you're a beginner or an expert, we welcome all fitness levels!"
+    },
+    "profile": {
+      "title": "Your Profile",
+      "description": "Manage your personal profile, track your progress, and get detailed insights into your fitness journey, including BMI, workout history, and more.",
+      "imagePlaceholder": "* Images of user profile, fitness stats, etc. will go here"
+    },
+    "start": {
+      "title": "Start Your Fitness Journey",
+      "getStarted": "Get Started"
+    }
+  }
+}
+  

@@ -24,27 +24,35 @@ const getExerciseById = async ({ id }: { id: number }): Promise<Exercise | null>
     }
 };
 
-const createExercise = async (exerciseData: {
-    name: string;
-    description: string;
-    sets: number;
-    reps: number;
-    rest: number;
-    muscleGroup: string;
-}): Promise<Exercise> => {
+const createExercise = async (group: Exercise): Promise<Exercise> => {
     try {
-        const newExercisePrisma = await database.exercise.create({
-            data: exerciseData
+        const exercisePrisma = await database.exercise.create({
+            data: {
+                name: group.getName(),
+                description: group.getDescription(),
+                sets: group.getSets(),
+                reps: group.getReps(),
+                rest: group.getRest(),
+                muscleGroup: group.getMuscleGroup()
+            },
         });
-        return Exercise.from(newExercisePrisma);
+
+        return Exercise.from(exercisePrisma);
     } catch (error) {
         console.error(error);
         throw new Error('Database error. See server log for details.');
     }
 };
+const deleteExercise = async (id: number): Promise<Exercise> => {
+    const deletedExercise = await database.exercise.delete({
+        where: { id }
+    });
+    return Exercise.from(deletedExercise);
+};
 
 export default {
     getAllExercises,
     getExerciseById,
-    createExercise
+    createExercise,
+    deleteExercise
 };

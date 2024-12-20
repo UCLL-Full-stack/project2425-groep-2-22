@@ -1,55 +1,68 @@
+import React from "react";
 import { Exercise } from "@/types";
-import WorkoutService from "@/services/WorkoutService";
-import ExerciseService from "@/services/ExerciseService";
-import { useEffect, useState } from "react";
+import classNames from "classnames";
 
 type Props = {
-    workoutId: string;
-    onAddExercise: (exercise: Exercise) => void; // Accept the callback
+  exercises: Array<Exercise>;
+  onRemoveExercise: (id: number) => void;
 };
 
-const ExerciseOverview: React.FC<Props> = ({ workoutId, onAddExercise }) => {
-    const [exercises, setExercises] = useState<Exercise[]>([]);
-    const [statusMessage, setStatusMessage] = useState<string>("");
-
-    useEffect(() => {
-        fetchExercises();
-    }, []);
-
-    const fetchExercises = async () => {
-        const response = await ExerciseService.getAllExercises();
-        const exercisesData = await response.json();
-        setExercises(exercisesData);
-    };
-
-    const handleAddExercise = async (exercise: Exercise) => {
-        try {
-            const response = await WorkoutService.addExerciseToWorkout(workoutId, exercise.id!.toString());
-            if (response.ok) {
-                onAddExercise(exercise); // Call the callback to update the workout with the full exercise object
-                setStatusMessage(`Exercise "${exercise.name}" added successfully!`);
-            } else {
-                setStatusMessage("Failed to add exercise. Please try again.");
-            }
-        } catch (error) {
-            setStatusMessage("An error occurred while adding the exercise.");
-        }
-    };
-
-    return (
-        <div>
-            <h2>Select an Exercise to Add</h2>
-            {statusMessage && <p>{statusMessage}</p>}
-            <ul>
-                {exercises.map((exercise) => (
-                    <li key={exercise.id}>
-                        <span>{exercise.name} - {exercise.muscleGroup}</span>
-                        <button onClick={() => handleAddExercise(exercise)}>Add</button> {/* Pass the full exercise object */}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+const ExerciseOverviewTable: React.FC<Props> = ({ exercises, onRemoveExercise }: Props) => {
+  const loggedInUser = localStorage.getItem("loggedInUser");
+  const role = loggedInUser ? JSON.parse(loggedInUser).role : null;
+  return (
+    <div className="overflow-x-auto bg-white shadow-md rounded-lg mb-6">
+      <table className="min-w-full table-auto">
+        <thead className="bg-blue-600 text-white">
+          <tr>
+            <th scope="col" className="px-4 py-2">
+              Name
+            </th>
+            <th scope="col" className="px-4 py-2">
+              Description
+            </th>
+            <th scope="col" className="px-4 py-2">
+              Sets
+            </th>
+            <th scope="col" className="px-4 py-2">
+              Reps
+            </th>
+            <th scope="col" className="px-4 py-2">
+              Rest
+            </th>
+            <th scope="col" className="px-4 py-2">
+              Muscle Group
+            </th>
+            <th scope="col" className="px-4 py-2">
+              Delete
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {exercises.map((exercise) => (
+            <tr key={exercise.id} className="hover:bg-gray-50">
+              <td className="px-4 py-2">{exercise.name}</td>
+              <td className="px-4 py-2 break-words whitespace-normal">{exercise.description}</td>
+              <td className="px-4 py-2">{exercise.sets}</td>
+              <td className="px-4 py-2">{exercise.reps}</td>
+              <td className="px-4 py-2">{exercise.rest} sec</td>
+              <td className="px-4 py-2">{exercise.muscleGroup}</td>
+              <td className="px-4 py-2">
+              {role === "admin" && (
+                <button
+                  className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+                  onClick={() => exercise.id !== undefined && onRemoveExercise(exercise.id)}
+                >
+                  Remove
+                </button>
+              )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
-export default ExerciseOverview;
+export default ExerciseOverviewTable;

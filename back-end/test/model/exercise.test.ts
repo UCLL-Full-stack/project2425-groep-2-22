@@ -3,6 +3,7 @@ import { Exercise } from '../../model/exercise';
 test('given: valid values for exercise, when: exercise is created, then: exercise is created with those values', () => {
     // given
     const exerciseData = {
+        id: 1,
         name: 'Bench Press',
         description: 'A compound exercise that works the chest, shoulders, and triceps.',
         sets: 3,
@@ -15,6 +16,7 @@ test('given: valid values for exercise, when: exercise is created, then: exercis
     const exercise = new Exercise(exerciseData);
 
     // then
+    expect(exercise.getId()).toEqual(exerciseData.id);
     expect(exercise.getName()).toEqual(exerciseData.name);
     expect(exercise.getDescription()).toEqual(exerciseData.description);
     expect(exercise.getSets()).toEqual(exerciseData.sets);
@@ -26,6 +28,7 @@ test('given: valid values for exercise, when: exercise is created, then: exercis
 test('given: exercise without a name, when: exercise is created, then: an error is thrown', () => {
     // given
     const exerciseData = {
+        id: 1,
         name: '',
         description: 'A compound exercise that works the chest, shoulders, and triceps.',
         sets: 3,
@@ -44,6 +47,7 @@ test('given: exercise without a name, when: exercise is created, then: an error 
 test('given: exercise without a description, when: exercise is created, then: an error is thrown', () => {
     // given
     const exerciseData = {
+        id: 1,
         name: 'Bench Press',
         description: '',
         sets: 3,
@@ -62,6 +66,7 @@ test('given: exercise without a description, when: exercise is created, then: an
 test('given: exercise without sets, when: exercise is created, then: an error is thrown', () => {
     // given
     const exerciseData = {
+        id: 1,
         name: 'Bench Press',
         description: 'A compound exercise that works the chest, shoulders, and triceps.',
         sets: 0,
@@ -80,6 +85,7 @@ test('given: exercise without sets, when: exercise is created, then: an error is
 test('given: exercise without reps, when: exercise is created, then: an error is thrown', () => {
     // given
     const exerciseData = {
+        id: 1,
         name: 'Bench Press',
         description: 'A compound exercise that works the chest, shoulders, and triceps.',
         sets: 3,
@@ -98,6 +104,7 @@ test('given: exercise without reps, when: exercise is created, then: an error is
 test('given: exercise without rest, when: exercise is created, then: an error is thrown', () => {
     // given
     const exerciseData = {
+        id: 1,
         name: 'Bench Press',
         description: 'A compound exercise that works the chest, shoulders, and triceps.',
         sets: 3,
@@ -116,6 +123,7 @@ test('given: exercise without rest, when: exercise is created, then: an error is
 test('given: exercise without a muscle group, when: exercise is created, then: an error is thrown', () => {
     // given
     const exerciseData = {
+        id: 1,
         name: 'Bench Press',
         description: 'A compound exercise that works the chest, shoulders, and triceps.',
         sets: 3,
@@ -134,6 +142,7 @@ test('given: exercise without a muscle group, when: exercise is created, then: a
 test('given: two exercises with the same details, when: checking equality, then: they are equal', () => {
     // given
     const exercise1 = new Exercise({
+        id: 1,
         name: 'Bench Press',
         description: 'A compound exercise that works the chest, shoulders, and triceps.',
         sets: 3,
@@ -142,6 +151,7 @@ test('given: two exercises with the same details, when: checking equality, then:
         muscleGroup: 'Chest',
     });
     const exercise2 = new Exercise({
+        id: 2,
         name: 'Bench Press',
         description: 'A compound exercise that works the chest, shoulders, and triceps.',
         sets: 3,
@@ -160,6 +170,7 @@ test('given: two exercises with the same details, when: checking equality, then:
 test('given: two exercises with different names, when: checking equality, then: they are not equal', () => {
     // given
     const exercise1 = new Exercise({
+        id: 1,
         name: 'Bench Press',
         description: 'A compound exercise that works the chest, shoulders, and triceps.',
         sets: 3,
@@ -168,6 +179,7 @@ test('given: two exercises with different names, when: checking equality, then: 
         muscleGroup: 'Chest',
     });
     const exercise2 = new Exercise({
+        id: 2,
         name: 'Squats',
         description: 'A lower body exercise that targets the legs and glutes.',
         sets: 3,

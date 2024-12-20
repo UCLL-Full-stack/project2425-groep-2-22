@@ -1,7 +1,14 @@
 type UserInput = {
     id?: number;
+    firstName: string;
+    lastName: string;
+    age: number;
+    weight: number;
+    height: number;
+    gender:string;
     username: string;
     password: string;
+    role: Role;
     workouts?: WorkoutInput[];
     posts?: PostInput[];
 };
@@ -35,5 +42,20 @@ type PostInput = {
     user: UserInput;
     createdAt?: Date;
 };
+type AuthenticationResponse = {
+    id: number;
+    token: string;
+    username: string;
+    role: string;
+    firstName: string;
+    lastName: string;
+    age: number;
+    weight: number;
+    height: number;
+    gender: string;
+};
 
-export { UserInput, WorkoutInput, ExerciseInput, PostInput };
+type Role = 'admin' | 'trainer' | 'member' | 'guest';
+
+
+export { UserInput, WorkoutInput, ExerciseInput, PostInput, AuthenticationResponse, Role };

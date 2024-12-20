@@ -1,6 +1,11 @@
 /**
  * @swagger
  * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *      type: http
+ *      scheme: bearer
+ *      bearerFormat: JWT
  *   schemas:
  *     Post:
  *       type: object
@@ -36,6 +41,8 @@ const postRouter = express.Router();
  * /post:
  *   get:
  *     summary: Get a list of all posts.
+ *     security:
+ *          - bearerAuth: []
  *     responses:
  *       200:
  *         description: A list of posts.
@@ -60,6 +67,8 @@ postRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
  * /post/{id}:
  *   get:
  *     summary: Get a post by ID.
+ *     security:
+ *          - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -90,6 +99,8 @@ postRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) =
  * /post:
  *   post:
  *     summary: Create a new post.
+ *     security:
+ *          - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
